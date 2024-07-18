@@ -30,6 +30,7 @@ function editPost($con)
 
     $post_image =  $_FILES['post_image']['name'];
     $post_image_temp =  $_FILES['post_image']['tmp_name'];
+    
 
     $post_tags =  mysqli_real_escape_string($con, $_POST['post_tags']);
     $post_content = mysqli_real_escape_string($con, $_POST['post_content']);

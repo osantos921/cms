@@ -18,6 +18,7 @@
 <div class="well">
     <h4>Blog Categories</h4>
     <div class="row">
+<<<<<<< HEAD
             <div class="col-lg-12">
                 <ul class="list-unstyled">
                     <?php                                      
@@ -33,6 +34,35 @@
             </div>
 
         </div>
+=======
+        <div class="col-lg-6">
+            <ul class="list-unstyled">
+                <li><a href="#">Category Name</a>
+                </li>
+                <li><a href="#">Category Name</a>
+                </li>
+                <li><a href="#">Category Name</a>
+                </li>
+                <li><a href="#">Category Name</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="col-lg-6">
+            <ul class="list-unstyled">
+                <li><a href="#">Category Name</a>
+                </li>
+                <li><a href="#">Category Name</a>
+                </li>
+                <li><a href="#">Category Name</a>
+                </li>
+                <li><a href="#">Category Name</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.col-lg-6 -->
+    </div>
+>>>>>>> c7a3060f8903a0cf6d8b68186182e4e7d6e9b770
     <!-- /.row -->
 </div>
 

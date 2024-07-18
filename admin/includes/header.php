@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 <?php include "../includes/db.php"; ?>
+=======
+>>>>>>> c7a3060f8903a0cf6d8b68186182e4e7d6e9b770
 <!DOCTYPE html>
 <html lang="en">
 

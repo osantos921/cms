@@ -16,11 +16,12 @@
                             CMS Admin
                             <small><?php echo getUser(); ?></small>
                         </h1>
-                        <h2 class="bg-info">Post</h2>  
+                        <h2 class="bg-info">Comments</h2>  
                                             
                 <!-- /.row -->
                 <?php
-                    if (isset($_GET['source_post'])) {
+                 include "forms/view_all_comment.php";
+                   /* if (isset($_GET['source_post'])) {
                         $source = $_GET['source_post'];
                     } else {
                         $source = '';
@@ -35,7 +36,7 @@
                         default:
                             include "forms/view_all_post.php";
                             break;
-                    }
+                    } */
                     ?>
 
             </div>

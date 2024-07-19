@@ -1,7 +1,24 @@
-<<<<<<< HEAD
+<?php
+ 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if(isset($_SESSION['userRole']) && $_SESSION['userRole'] != 'Admin')
+{
+    echo "You dont have permission to access this page.";
+    header("refresh:2;url=../index.php");
+    exit();
+}
+
+if(!isset($_SESSION['userRole']))
+{
+    echo "Please login to continue.";
+    header("refresh:2;url=../index.php");
+    exit();
+}
+?>
 <?php include "../includes/db.php"; ?>
-=======
->>>>>>> c7a3060f8903a0cf6d8b68186182e4e7d6e9b770
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +40,8 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

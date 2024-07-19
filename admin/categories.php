@@ -107,7 +107,7 @@ function updateCategory($con)
             <!-- Page Heading -->
             <h1 class="page-header">
                 CMS Admin
-                <small>Author</small>
+                <small><?php echo getUser(); ?></small>
             </h1>
             <h2 class="bg-info">Categories</h2>
 

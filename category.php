@@ -17,9 +17,14 @@
             </h1>
 
             <?php
-            $select_all_post = GetPosts($con);
+            if (isset($_GET['c_id'])) {
+                $cat_id = $_GET['c_id'];
+            }
 
-            while ($row = mysqli_fetch_assoc($select_all_post)) {
+            $qry = "SELECT * FROM posts WHERE postCategoryId=$cat_id AND inActive = 0";
+            $select_all_posts_qry = mysqli_query($con, $qry);
+
+            while ($row = mysqli_fetch_assoc($select_all_posts_qry)) {
                 $post_id =  $row['postId'];
                 $post_title =  $row['postTitle'];
                 $post_author =  $row['postAuthor'];

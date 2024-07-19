@@ -6,11 +6,13 @@ $db['db_password'] = "";
 $db["db_name"] = "cms";
 
 foreach ($db as $key => $value) {
-    define(strtoupper($key),$value);
+    if (!defined(strtoupper($key))) {
+        define(strtoupper($key), $value);
+    }
 }
 
-$con =  mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+$con =  mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 if (!$con) {
-    die("Connection Failed" . mysqli_error($con));
+    die("Connection Failed" . mysqli_connect_error());
 }

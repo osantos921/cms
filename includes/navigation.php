@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 <?php include "includes/db.php"; ?>
 <?php include "functions/data.php"; ?>
 
 
-=======
->>>>>>> c7a3060f8903a0cf6d8b68186182e4e7d6e9b770
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,12 +12,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <a class="navbar-brand" href="index.php">Home Page</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-<<<<<<< HEAD
                 <?php
                 $getCategories_navigation = GetCategories($con);
                 while ($row = mysqli_fetch_assoc($getCategories_navigation)) {
@@ -32,20 +28,12 @@
 
                 <?php
                 }
+                if(isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'Admin'){
                 ?>
                 <li>
                         <a href="admin/index.php">Admin</a>
-=======
-                <li>
-                    <a href="#">About</a>
                 </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
->>>>>>> c7a3060f8903a0cf6d8b68186182e4e7d6e9b770
-                </li>
+                <?php } ?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

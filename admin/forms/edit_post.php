@@ -55,7 +55,7 @@ function editPost($con)
         $qry .= "postImage = '{$post_image}', ";
         $qry .= "postTags = '{$post_tags}', ";
         $qry .= "postStatus = '{$post_status}', ";
-        $qry .= "postContent = '{$post_author}' ";
+        $qry .= "postContent = '{$post_content}' ";
         $qry .= "WHERE postId = {$post_id} ";
 
         $update_post_qry = mysqli_query($con, $qry);

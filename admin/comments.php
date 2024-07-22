@@ -20,23 +20,7 @@
                                             
                 <!-- /.row -->
                 <?php
-                 include "forms/view_all_comment.php";
-                   /* if (isset($_GET['source_post'])) {
-                        $source = $_GET['source_post'];
-                    } else {
-                        $source = '';
-                    }
-                    switch ($source) {
-                        case 'add_post';
-                           include "forms/add_post.php";
-                            break;
-                        case 'edit_post';
-                           include "forms/edit_post.php";
-                            break;                      
-                        default:
-                            include "forms/view_all_post.php";
-                            break;
-                    } */
+                 include "forms/view_all_comment.php";              
                     ?>
 
             </div>

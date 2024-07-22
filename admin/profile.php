@@ -22,7 +22,6 @@
                 <?php
                    include "forms/view_profile.php";
                     ?>
-
             </div>
             <!-- /.container-fluid -->
 

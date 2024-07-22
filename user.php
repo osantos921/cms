@@ -1,5 +1,4 @@
 <?php include "includes/header.php"; ?>
-
 <!-- Navigation -->
 <?php include "includes/navigation.php"; ?>
 
@@ -11,23 +10,11 @@
         <!-- Blog Post Content Column -->
         <div class="col-lg-8">
 
-            <?php
+            <!-- Blog Post -->
+          
+            <?php include "forms/create_user.php"; ?>
+            <!-- Comment -->
 
-            if (isset($_GET['source_post'])) {
-                $source = $_GET['source_post'];
-            } else {
-                $source = '';
-            }
-            switch ($source) {
-                case 'add_post';
-                    include "forms/new_post.php";
-                    break;
-                default:
-                    include "forms/view_post.php";
-                    break;
-            }
-
-            ?>
 
         </div>
 

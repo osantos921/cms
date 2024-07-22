@@ -1,19 +1,4 @@
 <?php
-/*
-if (isset($_GET['deletePostId'])) {
-    $post_id = $_GET['deletePostId'];
-    $qry = "DELETE FROM posts WHERE ";
-    $qry .= "postId = '{$post_id}'";
-    $delete_post_qry =  mysqli_query($con, $qry);
-    if (!$delete_post_qry) {
-        die('Qry Failed' . mysqli_error($con));
-    }
-
-    echo "<script>
-    window.location.href = 'posts.php';
-    </script>";
-    exit();
-} */
 
 if(isset($_POST['submit_approved']))
 {
@@ -95,7 +80,7 @@ function getDelete($con)
         <tbody>
             <?php
             //ALl Posts
-            $qry = "SELECT * FROM comments where inactive = 0";
+            $qry = "SELECT * FROM comments WHERE inactive = 0 ORDER BY commentId DESC";
             $select_all_comments = mysqli_query($con, $qry);
             while ($row = mysqli_fetch_assoc($select_all_comments)) {
                 $comment_id =  $row['commentId'];

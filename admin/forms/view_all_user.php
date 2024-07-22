@@ -45,7 +45,7 @@ if (isset($_GET['deleteUserId'])) {
         <tbody>
             <?php
             //ALl Posts
-            $qry = "SELECT * FROM users where inactive = 0";
+            $qry = "SELECT * FROM users where inactive = 0 ORDER BY userId DESC";
             $select_all_users = mysqli_query($con, $qry);
             while ($row = mysqli_fetch_assoc($select_all_users)) {
                 $user_id =  $row['userId'];

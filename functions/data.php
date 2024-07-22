@@ -8,13 +8,13 @@
 
     function GetPosts($con)
     {
-        $qry = "SELECT * FROM posts WHERE inactive = 0";
+        $qry = "SELECT * FROM posts WHERE inactive = 0 ORDER BY postId DESC";
         return mysqli_query($con, $qry);
     }
 
     function GetComment($con,int $post_id)
     {
-        $qry = "SELECT * FROM comments WHERE commentPostId= $post_id AND commentStatus= 'Approved' AND inactive = 0";
+        $qry = "SELECT * FROM comments WHERE commentPostId= $post_id AND commentStatus= 'Approved' AND inactive = 0 ORDER BY commentId DESC";
         return mysqli_query($con, $qry);
     }
 

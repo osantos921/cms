@@ -1,18 +1,21 @@
 <?php
- 
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+//include this to avoid html changes attackers
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 
-if(isset($_SESSION['userRole']) && $_SESSION['userRole'] != 'Admin')
-{
+
+if (isset($_SESSION['userRole']) && $_SESSION['userRole'] != 'Admin') {
     echo "You dont have permission to access this page.";
     header("refresh:2;url=../index.php");
     exit();
 }
 
-if(!isset($_SESSION['userRole']))
-{
+if (!isset($_SESSION['userRole'])) {
     echo "Please login to continue.";
     header("refresh:2;url=../index.php");
     exit();
@@ -42,14 +45,46 @@ if(!isset($_SESSION['userRole']))
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- to not allowed user to inspect -->
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Disable right-click context menu
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                alert('Right-click is disabled.');
+            });
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+            // Disable F12 key and other developer tools shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || (e.ctrlKey && (e.key === 'U' || e.key === 'I' || e.key === 'J')) || (e.ctrlKey && e.shiftKey && e.key === 'C')) {
+                    e.preventDefault();
+                    alert('Developer tools are disabled.');
+                }
+            });
 
+            // Detect developer tools open (does not work reliably in all browsers)
+            function detectDevTools() {
+                const threshold = 160;
+                let devtoolsOpen = false;
+                const onResize = () => {
+                    const width = window.innerWidth;
+                    const height = window.innerHeight;
+                    if (width < threshold || height < threshold) {
+                        devtoolsOpen = true;
+                    } else {
+                        devtoolsOpen = false;
+                    }
+                    if (devtoolsOpen) {
+                        alert('Developer tools are open.');
+                    }
+                };
+                window.addEventListener('resize', onResize);
+                onResize(); // Initial check
+            }
+            detectDevTools();
+        });
+
+    </script>
 </head>
 
 <body>

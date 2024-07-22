@@ -34,6 +34,7 @@
 
                 <div class="form-group">
                     <input class="btn btn-primary" type="submit" name="login" value="Sign In">
+                    <input class="btn btn-primary" type="submit" name="signup" value="Sign Up">
                 </div>
             </form>
             <!-- /.input-group -->
@@ -46,6 +47,7 @@
                 <p><strong>Role:</strong> <?php echo $_SESSION['userRole']; ?></p>
 
                 <div class="form-group">
+                    <a href="post.php?source_post=add_post" class="btn btn-primary">Add Post</a>
                     <a href="authenticate/logout.php" class="btn btn-primary">Log Out</a>
                 </div>
             </div>

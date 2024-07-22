@@ -1,4 +1,5 @@
 <?php
+//include this to avoid html changes attackers
 if (isset($_GET['editPostId'])) {
     $post_id = $_GET['editPostId'];
     $qry = "SELECT * FROM posts WHERE postId = $post_id";
@@ -18,7 +19,11 @@ if (isset($_GET['editPostId'])) {
 
 
 if (isset($_POST['edit_post'])) {
-    editPost($con);
+    if (empty($_SERVER['HTTP_REFERER']) || parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST) != $_SERVER['HTTP_HOST']) {
+        die('Invalid Referer');
+    }
+    
+ editPost($con);
 }
 function editPost($con)
 {

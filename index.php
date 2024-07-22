@@ -17,8 +17,28 @@
             </h1>
 
             <?php
-            $select_all_post = GetPosts($con);
+            $posts_per_page = 5;
 
+            // Get the current page number from the URL, default is 1
+            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+            // Calculate the starting post index
+            $start = ($page - 1) * $posts_per_page;
+
+            // Get the total number of posts
+            $total_posts_query = "SELECT COUNT(*) FROM posts";
+            $total_posts_result = mysqli_query($con, $total_posts_query);
+            $total_posts_row = mysqli_fetch_array($total_posts_result);
+            $total_posts = $total_posts_row[0];
+
+            // Calculate the total number of pages
+            $total_pages = ceil($total_posts / $posts_per_page);
+
+            // Fetch the posts for the current page
+            $query = "SELECT * FROM posts WHERE inactive = 0  ORDER BY postId DESC LIMIT $start, $posts_per_page";
+            $select_all_post = mysqli_query($con, $query);
+
+            //$select_all_post = GetPosts($con);
             while ($row = mysqli_fetch_assoc($select_all_post)) {
                 $post_id =  $row['postId'];
                 $post_title =  $row['postTitle'];
@@ -49,12 +69,17 @@
             ?>
             <!-- Pager -->
             <ul class="pager">
-                <li class="previous">
-                    <a href="#">&larr; Older</a>
-                </li>
-                <li class="next">
-                    <a href="#">Newer &rarr;</a>
-                </li>
+                <?php if ($page > 1) : ?>
+                    <li class="previous">
+                        <a href="?page=<?php echo $page - 1; ?>">&larr; Older</a>
+                    </li>
+                <?php endif; ?>
+
+                <?php if ($page < $total_pages) : ?>
+                    <li class="next">
+                        <a href="?page=<?php echo $page + 1; ?>">Newer &rarr;</a>
+                    </li>
+                <?php endif; ?>
             </ul>
 
         </div>

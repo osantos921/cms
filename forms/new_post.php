@@ -1,14 +1,18 @@
 <?php
- 
 if (isset($_POST['new_post'])) {
     newPost($con);
 }
+if (isset($_SESSION['userId'])) {
+    $name = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
+    $email =  $_SESSION['userEmail'];
+}
+
 function newPost($con)
 {
     $post_author = mysqli_real_escape_string($con, $_POST['post_author']);
     $post_title =  mysqli_real_escape_string($con, $_POST['post_title']);
     $post_category =  mysqli_real_escape_string($con, $_POST['post_category']);
-    $post_status =  mysqli_real_escape_string($con, $_POST['post_status']);
+    $post_status =  'Draft';
 
     $post_image =  $_FILES['post_image']['name'];
     $post_image_temp =  $_FILES['post_image']['tmp_name'];
@@ -17,13 +21,13 @@ function newPost($con)
     $post_content = mysqli_real_escape_string($con, $_POST['post_content']);
     $post_comment_count = 0;
     $post_view_count =  0;
-    $post_User = 'Admin';
+    $post_User = 'Subscriber';
     $inActive =  0;
 
     if (empty($post_title) || empty($post_content)) {
         echo "<script>alert('This field should not be empty. , " . "Title or Content" . "!');</script>";
     } else {
-
+        
         if (empty($post_image)) {
             $post_image = 'post.jpg';
         } else {
@@ -36,11 +40,11 @@ function newPost($con)
         $new_category_qry = mysqli_query($con, $qry);
         if (!$new_category_qry) {
             die('Qry Failed' . mysqli_error($con));
-        }        
+        }
 
         echo "<script>
-        alert('Post has been save successfully!');
-        window.location.href = 'posts.php';
+        alert('Post has been created successfully! Please wait for admins approval.');
+        window.location.href = 'index.php';
         </script>";
         exit();
     }
@@ -48,7 +52,7 @@ function newPost($con)
 
 if (isset($_POST['cancel_post'])) {
     echo "<script>
-    window.location.href = 'posts.php';
+    window.location.href = 'index.php';
     </script>";
     exit();
 }
@@ -59,7 +63,7 @@ if (isset($_POST['cancel_post'])) {
     <form action="" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="post_author">Author</label>
-            <input type="text" class="form-control" name="post_author">
+            <input type="text" class="form-control" name="post_author" value="<?php echo $name; ?>" readonly>
         </div>
         <div class="form-group">
             <label for="post_title">Title</label>
@@ -75,17 +79,6 @@ if (isset($_POST['cancel_post'])) {
                     $cat_id = $row['catId'];
                     $cat_title = $row['catTitle'];
                     echo "<option value='{$cat_id}'>{$cat_title}</option>";
-                }
-                ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="post_status">Status</label>
-            <select class="form-control" name="post_status" id="post_status">
-                <?php
-                $status_array = ['Draft', 'Published'];
-                foreach ($status_array as $status) {
-                    echo "<option value='{$status}'>{$status}</option>";
                 }
                 ?>
             </select>

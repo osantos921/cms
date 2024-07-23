@@ -22,6 +22,9 @@
                 case 'add_post';
                     include "forms/new_post.php";
                     break;
+                    case 'edit_post';
+                    include "forms/edit_post.php";
+                    break;
                 default:
                     include "forms/view_post.php";
                     break;

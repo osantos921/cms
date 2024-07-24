@@ -3,6 +3,7 @@
 } ?>
 
 <?php include "../includes/db.php"; ?>
+<?php include "../functions/utilities.php"; ?>
 
 <?php
 function login_user($con)
@@ -30,10 +31,10 @@ function login_user($con)
         $db_user_role = $user_found['userRole'];
         $db_user_email = $user_found['userEmail'];
         $db_user_image = $user_found['userImage'];
-        $db_rand_salt = $user_found['randSalt'];
 
+        $salt = getRandSalt($con);
         // Verify the password
-        if ($password == $db_user_password) {
+        if (verifyPassword($password,$db_user_password)) {
             // Set session variables
             $_SESSION['userId'] = $db_user_id;
             $_SESSION['username'] = $db_username;

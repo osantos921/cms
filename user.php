@@ -9,11 +9,13 @@
 
         <!-- Blog Post Content Column -->
         <div class="col-lg-8">
-
-            <!-- Blog Post -->          
+            <h1 class="page-header">
+                Page Blog
+                <small>Registration</small>
+            </h1>
+            <!-- Blog Post -->
             <?php include "forms/create_user.php"; ?>
-            <!-- Comment -->
-
+            Comment
         </div>
 
         <!-- Blog Sidebar Widgets Column -->

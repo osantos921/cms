@@ -11,6 +11,27 @@ if (isset($_GET['p_id'])) {
     $post_date = $row['postDate'];
     $post_image = $row['postImage'];
     $post_content = $row['postContent'];
+
+    UpdatePostCommentCount($con, $post_id);
+}
+
+function UpdatePostCommentCount($con, $post_id)
+{
+    $post_id = (int) $post_id;
+    $count = GetCommentPostCount($con, $post_id);
+
+    if ($count === false) {
+        die('Failed to get comment count: ' . mysqli_error($con));
+    }
+
+    $qry = "UPDATE posts SET ";
+    $qry .= "postCommentCount = {$count} WHERE ";
+    $qry .= "postId = {$post_id}";
+
+    $update_count_qry = mysqli_query($con, $qry);
+    if (!$update_count_qry) {
+        die('Qry Failed' . mysqli_error($con));
+    }
 }
 ?>
 <!-- Title -->
@@ -55,7 +76,7 @@ function newComment($con)
     $inActive =  0;
 
     if (empty($comment_author) || empty($comment_email) || empty($comment_content)) {
-        echo "<script>alert('This field should not be empty. , " . "Author,Email or Comment" . "!');</script>";
+        echo "<script>alert('This field should not be empty. , " . "Comment" . "!');</script>";
     } else {
 
         $qry = "INSERT INTO comments(commentPostId,commentDate,commentAuthor,commentEmail,commentContent,commentStatus,inActive)VALUES";
@@ -76,8 +97,7 @@ function newComment($con)
     }
 }
 
-if(isset($_POST['edit_post']))
-{
+if (isset($_POST['edit_post'])) {
     echo "<script>
     window.location.href = 'post.php?source_post=edit_post&p_id={$post_id}';  
     </script>";
@@ -109,10 +129,9 @@ if (isset($_SESSION['userId'])) {
             </div>
             <button type="submit" class="btn btn-primary" name="submit_comment">Submit</button>
             <?php
-            if ($role == 'Admin') {            
+            if ($role == 'Admin') {
             ?>
-           
-            <button type="submit" class="btn btn-primary" name="edit_post">Edit Post</button>
+                <button type="submit" class="btn btn-primary" name="edit_post">Edit Post</button>
             <?php } ?>
         </form>
     </div>

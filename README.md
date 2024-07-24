@@ -9,7 +9,7 @@ Please delete this note before importing the database
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2024 at 03:39 PM
+-- Generation Time: Jul 24, 2024 at 10:56 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -71,10 +71,12 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`commentId`, `commentPostId`, `commentDate`, `commentAuthor`, `commentEmail`, `commentContent`, `commentStatus`, `inActive`) VALUES
-(1, 1, '2024-07-19', 'Oscar Santos', 'oscar.santos921@gmail.com', 'Wow comment features is comming', 'Approved', 0),
-(2, 1, '2024-07-19', 'Oscar Santos', 'oscar.santos921@gmail.com', 'test2', 'Approved', 0),
-(3, 1, '2024-07-19', 'Oscar Santos', 'oscar.santos921@gmail.com', 'test3', 'Draft', 0),
-(4, 1, '2024-07-19', 'Oscar Santos', 'oscar.santos921@gmail.com', 'test4', 'Draft', 0);
+(1, 1, '2024-07-19', 'Peter Parker', 'peter.parker@gmail.com', 'Wow comment features is comming', 'Approved', 0),
+(4, 1, '2024-07-19', 'Peter Parker', 'peter.parker@gmail.com', 'test4', 'Approved', 0),
+(6, 1, '2024-07-22', 'Peter Parker', 'asd@asd.com', 'wow awesome php codes.', 'Approved', 0),
+(7, 5, '2024-07-23', 'Peter Parker', 'asd@asd.com', 'nice test', 'Approved', 0),
+(8, 7, '2024-07-24', 'Peter Parker', 'asd@asd.com', 'test', 'Approved', 0),
+(9, 7, '2024-07-24', 'Peter Parker', 'asd@asd.com', 'I want to add another comment', 'Approved', 0);
 
 -- --------------------------------------------------------
 
@@ -103,9 +105,12 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`postId`, `postCategoryId`, `postTitle`, `postAuthor`, `postUser`, `postDate`, `postImage`, `postContent`, `postTags`, `postCommentCount`, `postStatus`, `postViewCount`, `inActive`) VALUES
-(1, 1, 'New Php App', 'Oscar Santos', 'Oscar Santos', '2024-07-18', 'php.jpg', 'this is a great challenge for me to recreate this php again Lol.', 'Vb.Net,CSharp,Php', 0, 'Published', 0, 0),
-(2, 1, 'Test', 'Oscar', 'Admin', '2024-07-19', 'Java.jpg', 'wow mate this is great', 'cSharp', 0, 'Published', 0, 0),
-(3, 1, 'Test', 'Oscar', 'Admin', '2024-07-19', 'cSharp.jpg', 'this is improve version of my old php codes', 'Vb.net', 0, 'Published', 0, 0);
+(1, 1, 'New', 'test', 'test', '2024-07-18', 'php.jpg', 'this is a great challenge for me to recreate this php again Lol.', 'Vb.Net,CSharp,Php', 0, 'Published', 0, 0),
+(2, 1, 'Test', 'Admin', 'Admin', '2024-07-19', 'Java.jpg', 'wow mate this is great', 'cSharp', 0, 'Published', 0, 0),
+(3, 1, 'Test', 'Admin', 'Admin', '2024-07-19', 'cSharp.jpg', 'this is improve version of my old php codes', 'Vb.net', 0, 'Published', 0, 0),
+(4, 1, 'wow', 'new Post', 'Subscriber', '2024-07-22', 'post.jpg', 'wow this is good', 'new', 0, 'Published', 0, 0),
+(6, 1, 'new', 'new3', 'Admin', '2024-07-23', 'post.jpg', 'this is test', 'new', 0, 'Published', 0, 0),
+(7, 1, 'Yes Edit post on Home Page', 'Oscar', 'Subscriber', '2024-07-23', 'post.jpg', 'Nice Security Added for Inspect element!! ', 'Php,Vb6,cSharp', 2, 'Published', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -122,7 +127,7 @@ CREATE TABLE `users` (
   `userEmail` varchar(255) NOT NULL,
   `userImage` varchar(255) NOT NULL,
   `userRole` varchar(255) NOT NULL,
-  `randSalt` varchar(255) NOT NULL,
+  `randSalt` varchar(255) NOT NULL DEFAULT '$2y$10$iusesomecrazystring1993',
   `inActive` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -131,9 +136,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userId`, `userName`, `userPassword`, `firstName`, `lastName`, `userEmail`, `userImage`, `userRole`, `randSalt`, `inActive`) VALUES
-(1, 'admin', 'admin', 'Oscar', 'Santos', 'asd@asd.com', 'admin.jpg', 'Admin', 'dsa', 0),
-(2, 'user', 'user', 'Jeje', 'Santos', 'Jeje@gmail.com', 'user.jpg', 'Subsciber', 'user', 0),
-(5, 'test', 'test', 'test', 'test', 'test@test.com', 'user.jpg', 'Subscriber', 'user', 0);
+(10, 'user', '$2y$10$iusesomecrazystring19uTLZJczYERTCWvk0p.RYVd112zxoER4K', 'user', 'user', 'user@user.com', 'user.jpg', 'Subsciber', '$2y$10$iusesomecrazystring1993', 0),
+(11, 'admin', '$2y$10$iusesomecrazystring19utQa1p4wbWaGnqG.s2tOu2w44TomSO6S', 'admin', 'admin', 'admin@admin.com', 'admin.jpg', 'Admin', '$2y$10$iusesomecrazystring1993', 0),
+(12, 'user2', '$2y$10$iusesomecrazystring19un2.ISKUfa4Iy7EYrBqj/UCWIzUrfoNC', 'user2', 'user2', 'user@user.com', 'user.jpg', 'Admin', '$2y$10$iusesomecrazystring1993', 0),
+(14, 'test', '$2y$10$iusesomecrazystring19uvjDUhIN/1ab74bc1SKcnpHg4UnteAw.', 'test', 'test', 'test@test.com', 'user.jpg', 'Admin', '$2y$10$iusesomecrazystring1993', 0),
+(15, 'test2', '$2y$10$iusesomecrazystring19udioC9welvnewDoy5Pfnpelm/SWDDRri', 'test', 'test', 'test@test.com', 'user.jpg', 'Subscriber', '$2y$10$iusesomecrazystring1993', 0);
 
 --
 -- Indexes for dumped tables
@@ -177,22 +184,21 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `commentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `commentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `postId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `postId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-

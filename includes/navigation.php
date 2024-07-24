@@ -1,5 +1,6 @@
 <?php include "includes/db.php"; ?>
 <?php include "functions/data.php"; ?>
+<?php include "functions/utilities.php"; ?>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">

@@ -14,24 +14,25 @@ function getCreateUser($con)
     $user_image =  $_FILES['user_image']['name'];
     $user_image_temp =  $_FILES['user_image']['tmp_name'];
     $user_role = 'Subscriber';
-    $rand_salt = 'user';
+    //$rand_salt = 'user';
     $inactive = 0;
 
+    $rand_salt = getRandSalt($con);
+    $user_password = crypt($user_password,$rand_salt);
 
+    echo  $rand_salt;
     if (empty($user_image)) {      
         $user_image = 'user.jpg';
     } else {
         move_uploaded_file($user_image_temp, "../images/$user_image");
     }
 
- 
-
     if (empty($user_name) || empty($user_password)) {
         echo "<script>alert('This field should not be empty. , " . "User Name or Password" . "!');</script>";
     } else {
 
-        $qry = "INSERT INTO users(userName,userPassword,firstName,lastName,userImage,userEmail,userRole,randSalt,inActive)VALUES";
-        $qry .="('{$user_name}','{$user_password}','{$first_name}','{$last_name}','{$user_image}','{$user_email}','{$user_role}','{$rand_salt}',$inactive)";
+        $qry = "INSERT INTO users(userName,userPassword,firstName,lastName,userImage,userEmail,userRole,inActive)VALUES";
+        $qry .="('{$user_name}','{$user_password}','{$first_name}','{$last_name}','{$user_image}','{$user_email}','{$user_role}',$inactive)";
       
         $save_user_qry =  mysqli_query($con, $qry);
         if (!$save_user_qry) {
@@ -64,7 +65,7 @@ if (isset($_POST['cancel_user'])) {
         </div>
         <div class="form-group">
             <label for="user_password">Password</label>
-            <input type="text" class="form-control" name="user_password">
+            <input type="password" class="form-control" name="user_password">
         </div>
         <div class="form-group">
             <label for="first_name">First Name</label>
@@ -83,8 +84,8 @@ if (isset($_POST['cancel_user'])) {
             <input type="file" class="form-control" name="user_image">
         </div>              
         <div class="form-group">
-            <input class="btn btn-primary" type="submit" name="create_user" value="Create User">
-            <input class="btn btn-primary" type="submit" name="cancel_user" value="Cancel">
+            <input class="btn btn-custom btn-lg btn-block" type="submit" name="create_user" value="Register">
+            <input class="btn btn-custom btn-lg btn-block" type="submit" name="cancel_user" value="Cancel">
         </div>
     </form>
 </div>

@@ -22,6 +22,8 @@ if (!isset($_SESSION['userRole'])) {
 }
 ?>
 <?php include "../includes/db.php"; ?>
+<?php include "../functions/data.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

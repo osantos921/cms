@@ -14,8 +14,10 @@ function getSaveUser($con)
     $user_image =  $_FILES['user_image']['name'];
     $user_image_temp =  $_FILES['user_image']['tmp_name'];
     $user_role = mysqli_real_escape_string($con, $_POST['user_role']);
-    $rand_salt = mysqli_real_escape_string($con, $_POST['rand_salt']);
     $inactive = 0;
+
+    $rand_salt = getRandSalt($con);
+    $user_password = crypt($user_password,$rand_salt);
 
     if (empty($user_image)) {
 
@@ -33,8 +35,8 @@ function getSaveUser($con)
         echo "<script>alert('This field should not be empty. , " . "User Name or Password" . "!');</script>";
     } else {
 
-        $qry = "INSERT INTO users(userName,userPassword,firstName,lastName,userImage,userEmail,userRole,randSalt,inActive)VALUES";
-        $qry .= "('{$user_name}','{$user_password}','{$first_name}','{$last_name}','{$user_image}','{$user_email}','{$user_role}','{$rand_salt}',$inactive)";
+        $qry = "INSERT INTO users(userName,userPassword,firstName,lastName,userImage,userEmail,userRole,inActive)VALUES";
+        $qry .= "('{$user_name}','{$user_password}','{$first_name}','{$last_name}','{$user_image}','{$user_email}','{$user_role}',$inactive)";
 
         $save_user_qry =  mysqli_query($con, $qry);
         if (!$save_user_qry) {
@@ -67,7 +69,7 @@ if (isset($_POST['cancel_user'])) {
         </div>
         <div class="form-group">
             <label for="user_password">Password</label>
-            <input type="text" class="form-control" name="user_password">
+            <input type="password" class="form-control" name="user_password">
         </div>
         <div class="form-group">
             <label for="first_name">First Name</label>
@@ -96,11 +98,7 @@ if (isset($_POST['cancel_user'])) {
                 ?>
             </select>
 
-        </div>
-        <div class="form-group">
-            <label for="rand_salt">Salt</label>
-            <input type="text" class="form-control" name="rand_salt">
-        </div>
+        </div>      
         <div class="form-group">
             <input class="btn btn-primary" type="submit" name="save_user" value="Save User">
             <input class="btn btn-primary" type="submit" name="cancel_user" value="Cancel User">

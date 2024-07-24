@@ -7,8 +7,7 @@ if (isset($_GET['u_Id'])) {
     $row = mysqli_fetch_assoc($select_edit_user_qry);
 
     $user_id = $row['userId'];
-    $user_name = $row['userName'];
-    $user_password = $row['userPassword'];
+    $user_name = $row['userName'];   
     $first_name = $row['firstName'];
     $last_name = $row['lastName'];
     $user_email = $row['userEmail'];
@@ -31,13 +30,7 @@ if (isset($_GET['u_Id'])) {
             <input type="text" value=<?php if (isset($user_name)) {
                                             echo $user_name;
                                         } ?> class="form-control" name="user_name">
-        </div>
-        <div class="form-group">
-            <label for="user_password">Password</label>
-            <input type="text" value=<?php if (isset($user_password)) {
-                                            echo $user_password;
-                                        } ?> class="form-control" name="user_password">
-        </div>
+        </div>       
         <div class="form-group">
             <label for="first_name">First Name</label>
             <input type="text" value=<?php if (isset($first_name)) {
@@ -76,13 +69,7 @@ if (isset($_GET['u_Id'])) {
                 ?>
             </select>
 
-        </div>
-        <div class="form-group">
-            <label for="rand_salt">Salt</label>
-            <input type="text" value=<?php if (isset($rand_salt)) {
-                                            echo $rand_salt;
-                                        } ?> class="form-control" name="rand_salt">
-        </div>
+        </div>     
         <div class="form-group">
             <input class="btn btn-primary" type="submit" name="update_user" value="Update User">
             <input class="btn btn-primary" type="submit" name="cancel_user" value="Cancel User">
@@ -99,16 +86,15 @@ function getUpdateUser($con)
 {
     
     $user_id = $_POST['user_id'];
-    $user_name = mysqli_real_escape_string($con, $_POST['user_name']);
-    $user_password = mysqli_real_escape_string($con, $_POST['user_password']);
+    $user_name = mysqli_real_escape_string($con, $_POST['user_name']);  
     $first_name = mysqli_real_escape_string($con, $_POST['first_name']);
     $last_name = mysqli_real_escape_string($con, $_POST['last_name']);
     $user_email = mysqli_real_escape_string($con, $_POST['user_email']);
     $user_image =  $_FILES['user_image']['name'];
     $user_image_temp =  $_FILES['user_image']['tmp_name'];
     $user_role = mysqli_real_escape_string($con, $_POST['user_role']);
-    $rand_salt = mysqli_real_escape_string($con, $_POST['rand_salt']);
     $inactive = 0;
+    
 
     if (empty($user_image)) {
         $img_user_qry = "SELECT * FROM users WHERE userId = $user_id";
@@ -119,18 +105,16 @@ function getUpdateUser($con)
         move_uploaded_file($user_image_temp, "../images/$user_image");
     }
 
-    if (empty($user_name) || empty($user_password)) {
-        echo "<script>alert('This field should not be empty. , " . "User Name or Password" . "!');</script>";
+    if (empty($user_name)) {
+        echo "<script>alert('This field should not be empty. , " . "User Name" . "!');</script>";
     } else {
         $qry = "UPDATE users SET ";
         $qry .= "userName = '{$user_name}', ";
-        $qry .= "userPassword = '{$user_password}', ";
         $qry .= "firstName = '{$first_name}', ";
         $qry .= "lastName = '{$last_name}', ";
         $qry .= "userImage = '{$user_image}', ";
         $qry .= "userEmail = '{$user_email}', ";
         $qry .= "userRole = '{$user_role}', ";
-        $qry .= "randSalt = '{$rand_salt}', ";
         $qry .= "inActive = '{$inactive}' ";
         $qry .= "WHERE userId = '{$user_id}'";
 

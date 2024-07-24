@@ -149,6 +149,7 @@ function getDeletePost_Selected($con, $id)
                         <th>Content</th>
                         <th>Date</th>
                         <th>Published</th>
+                        <th>View Post</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -182,6 +183,7 @@ function getDeletePost_Selected($con, $id)
                         echo  "<td>{$post_content}</td>";
                         echo  "<td>{$post_date}</td>";
                         echo  "<td> <a href='posts.php?published_Id={$post_id}'>Published</a></td>";
+                        echo  "<td> <a href='../post.php?p_id={$post_id}'>View Post</a></td>";
                         echo  "<td> <a href='posts.php?source_post=edit_post&editPostId={$post_id}'>Edit</a></td>";
                         echo  "<td> <a href='posts.php?deletePostId={$post_id}'>Delete</a></td>";
                         echo  "</tr>";

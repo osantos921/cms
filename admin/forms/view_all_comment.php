@@ -183,21 +183,21 @@ function getDelete_selected($con,$id)
                         <form method='post' action='' enctype='multipart/form-data'>
                             <input type='hidden' name='source_comment' value='Approved'>
                             <input type='hidden' name='c_Id' value='{$comment_id}'>
-                            <input class='btn btn-primary' type='submit' name='submit_approved' value='Approve'>
+                            <input class='btn btn-success' type='submit' name='submit_approved' value='Approve'>
                         </form>
                     </td>";
                     echo "<td>
                         <form method='post' action='' enctype='multipart/form-data'>
                             <input type='hidden' name='source_comment' value='UnApproved'>
                             <input type='hidden' name='c_Id' value='{$comment_id}'>
-                            <input class='btn btn-primary' type='submit' name='submit_unapproved' value='UnApprove'>
+                            <input class='btn btn-success' type='submit' name='submit_unapproved' value='UnApprove'>
                         </form>
                     </td>";
                     echo "<td>
                         <form method='post' action='' enctype='multipart/form-data'>
                             <input type='hidden' name='source_comment' value='Delete'>
                             <input type='hidden' name='c_Id' value='{$comment_id}'>
-                            <input class='btn btn-primary' type='submit' name='submit_delete' value='Delete'>
+                            <input class='btn btn-danger' type='submit' name='submit_delete' value='Delete'>
                         </form>
                     </td>";
                     echo  "</tr>";

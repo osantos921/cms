@@ -84,8 +84,8 @@ if (isset($_POST['cancel_user'])) {
             <input type="file" class="form-control" name="user_image">
         </div>              
         <div class="form-group">
-            <input class="btn btn-custom btn-lg btn-block" type="submit" name="create_user" value="Register">
-            <input class="btn btn-custom btn-lg btn-block" type="submit" name="cancel_user" value="Cancel">
+            <input class="btn btn-custom btn-lg btn-block btn-primary" type="submit" name="create_user" value="Register">
+            <input class="btn btn-custom btn-lg btn-block btn-primary" type="submit" name="cancel_user" value="Cancel">
         </div>
     </form>
 </div>

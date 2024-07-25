@@ -129,14 +129,25 @@ function getDelete_selected($con,$id)
             checkboxes[i].checked = source.checked;
         }
     }
+
+    function confirmDelete() {
+        return confirm('Are you sure you want to delete this comment?');
+    }
+
+    function confirmDeleteIfNeeded(event) {
+        if (event.submitter && event.submitter.name === 'delete_selected') {
+            return confirmDelete();
+        }
+        return true;
+    }
 </script>
 
 <div class="col-xs-12">
-    <form action="" method="post">
+    <form action="" method="post" onsubmit="return confirmDeleteIfNeeded(event)">
     <div class="form-group">
-            <button class="btn btn-success" type="submit" name="approved_selected">Approved Selected</button>
-            <button class="btn btn-success" type="submit" name="unapproved_selected">UnAprroved Selected</button>            
-            <button class="btn btn-danger" type="submit" name="delete_selected">Delete Selected</button>
+            <input class="btn btn-success" type="submit" name="approved_selected" value="Approved Selected">
+            <input class="btn btn-success" type="submit" name="unapproved_selected" value="UnAprroved Selected">            
+            <input class="btn btn-danger"  type="submit" name="delete_selected" value="Delete Selected">
         </div>
         <table class="table table-bordered table-hover">
             <thread>
@@ -194,10 +205,10 @@ function getDelete_selected($con,$id)
                         </form>
                     </td>";
                     echo "<td>
-                        <form method='post' action='' enctype='multipart/form-data'>
+                        <form method='post' action='' enctype='multipart/form-data' onsubmit='return confirmDelete()'>
                             <input type='hidden' name='source_comment' value='Delete'>
                             <input type='hidden' name='c_Id' value='{$comment_id}'>
-                            <input class='btn btn-danger' type='submit' name='submit_delete' value='Delete'>
+                            <input class='btn btn-danger'  type='submit' name='submit_delete' value='Delete'>
                         </form>
                     </td>";
                     echo  "</tr>";

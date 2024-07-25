@@ -68,6 +68,11 @@ if (isset($_POST['signup'])) {
     header("Location: ../user.php");
 }
 
+if (isset($_POST['change_password'])) {
+    $user_id= $_SESSION['userId'];
+    header("Location: ../user.php?source_user=change_password&u_id=$user_id");
+}
+
 function getUser()
 {
     if (isset($_SESSION['userId'])) {

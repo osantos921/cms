@@ -1,5 +1,5 @@
 <div class="col-md-4">
-<?php global $search; ?>
+    <?php global $search; ?>
     <!-- Blog Search Well -->
     <div class="well">
         <h4>Blog Search</h4>
@@ -76,10 +76,20 @@
         <!-- /.row -->
     </div>
 
-    <!-- Side Widget Well -->
-    <div class="well">
-        <h4>Side Widget Well</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-    </div>
+    <?php
+    if (isset($_SESSION['username'])) {
+    ?>
+        <!-- Side Widget Well -->
+        <div class="well">
+            <h4></h4>
+            <form action="authenticate/login.php" method="post">
+                <div class="form-group">
+                    <input class="btn btn-custom btn-lg btn-block btn-primary" type="submit" name="change_password" value="Change Password">
+                    <input class="btn btn-custom btn-lg btn-block btn-primary" type="submit" name="inactive_account" value="Deactivate Account">
+                </div>
+            </form>
+        </div>
+
+    <?php } ?>
 
 </div>

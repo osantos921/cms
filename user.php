@@ -13,9 +13,29 @@
                 Page Blog
                 <small>Registration</small>
             </h1>
+            
             <!-- Blog Post -->
-            <?php include "forms/create_user.php"; ?>
-            Comment
+            <?php
+            
+            if (isset($_GET['source_user'])) {
+                $source = $_GET['source_user'];
+            } else {
+                $source = '';
+            }
+            switch ($source) {
+                case 'change_password';
+                    include "forms/change_password.php";
+                    break;                  
+                default:
+                    include "forms/create_user.php";
+                    break;
+            }
+            
+            
+            
+            
+            ?>
+        
         </div>
 
         <!-- Blog Sidebar Widgets Column -->

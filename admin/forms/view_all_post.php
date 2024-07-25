@@ -1,4 +1,5 @@
 <?php
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 if (isset($_GET['deletePostId'])) {
     getDeletePost($con);
@@ -123,10 +124,22 @@ function getDeletePost_Selected($con, $id)
             checkboxes[i].checked = source.checked;
         }
     }
+
+    function confirmDelete() {
+        return confirm('Are you sure you want to delete this comment?');
+    }
+
+    function confirmDeleteIfNeeded(event) {
+        if (event.submitter && event.submitter.name === 'delete_selected') {
+            return confirmDelete();
+        }
+        return true;
+    }
+
 </script>
 
 <div class="col-xs-12">
-    <form action="" method="post">
+    <form action="" method="post" onsubmit="return confirmDeleteIfNeeded(event)">
         <div class="form-group">
             <button class="btn btn-primary" type="button" onclick="redirectToGet()">Add Posts</button>
             <button class="btn btn-success" type="submit" name="draft_selected">Draft Selected</button>
@@ -185,7 +198,7 @@ function getDeletePost_Selected($con, $id)
                         echo  "<td> <a href='posts.php?published_Id={$post_id}'>Published</a></td>";
                         echo  "<td> <a href='../post.php?p_id={$post_id}'>View Post</a></td>";
                         echo  "<td> <a href='posts.php?source_post=edit_post&editPostId={$post_id}'>Edit</a></td>";
-                        echo  "<td> <a href='posts.php?deletePostId={$post_id}'>Delete</a></td>";
+                        echo  "<td> <a onClick=\"javascript: return confirm('Are you sure to delete?') \" href='posts.php?deletePostId={$post_id}'>Delete</a></td>";
                         echo  "</tr>";
                     }
 

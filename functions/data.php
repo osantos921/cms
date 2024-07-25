@@ -31,4 +31,17 @@
         }
     }
 
+    function GetUserPassword($con,int $user_id)
+    {
+        $qry = "SELECT * FROM users WHERE userId = $user_id AND inactive = 0";
+        $result = mysqli_query($con, $qry);
+        $row = mysqli_fetch_assoc($result);
+
+        if ($row) {
+            return $row['userPassword'];
+        } else {
+            return "";
+        }
+    }
+
 ?>
